@@ -64,6 +64,8 @@ class Connection(object):
             url = self.full_path(url)
         elif not url:  # blank path
             url = self.full_path(url)
+        if api_version == "v2" and "v3" in url:
+            url = url.replace("v3", "v2")
 
         qs = urlencode(query)
         if qs:

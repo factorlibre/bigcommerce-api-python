@@ -41,8 +41,8 @@ class ApiResource(Mapping):
             return cls(response, _connection=connection)
 
     @classmethod
-    def _make_request(cls, method, url, connection, data=None, params=None, headers=None):
-        return connection.make_request(method, url, data, params, headers)
+    def _make_request(cls, method, url, connection, data=None, params=None, headers=None, api_version=None):
+        return connection.make_request(method, url, data, params, headers, api_version)
 
     @classmethod
     def _get_path(cls, id):

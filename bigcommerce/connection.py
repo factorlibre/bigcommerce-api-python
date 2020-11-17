@@ -47,14 +47,14 @@ class Connection(object):
     def full_path(self, url):
         return "https://" + self.host + self.api_path.format(url)
 
-    def _run_method(self, method, url, data=None, query=None, headers=None):
+    def _run_method(self, method, url, data=None, query=None, headers=None, api_version='v2'):
         if query is None:
             query = {}
         if headers is None:
             headers = {}
 
         # Support v3
-        if self.api_path and 'v3' in self.api_path:
+        if self.api_path and api_version == 'v3' and 'v3' in self.api_path:
             url = 'catalog/{}'.format(url)
 
         # make full path if not given
@@ -130,8 +130,8 @@ class Connection(object):
 
     # Raw-er stuff
 
-    def make_request(self, method, url, data=None, params=None, headers=None):
-        response = self._run_method(method, url, data, params, headers)
+    def make_request(self, method, url, data=None, params=None, headers=None, api_version=None):
+        response = self._run_method(method, url, data, params, headers, api_version)
         return self._handle_response(url, response)
 
     def put(self, url, data):

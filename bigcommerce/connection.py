@@ -47,7 +47,7 @@ class Connection(object):
     def full_path(self, url):
         return "https://" + self.host + self.api_path.format(url)
 
-    def _run_method(self, method, url, data=None, query=None, headers=None, api_version='v2'):
+    def _run_method(self, method, url, data=None, query=None, headers=None, api_version=None):
         if query is None:
             query = {}
         if headers is None:

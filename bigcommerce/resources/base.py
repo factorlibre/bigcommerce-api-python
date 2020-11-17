@@ -32,6 +32,7 @@ class Mapping(dict):
 
 class ApiResource(Mapping):
     resource_name = ""  # The identifier which describes this resource in urls
+    api_version = "v2"
 
     @classmethod
     def _create_object(cls, response, connection=None):
@@ -41,8 +42,8 @@ class ApiResource(Mapping):
             return cls(response, _connection=connection)
 
     @classmethod
-    def _make_request(cls, method, url, connection, data=None, params=None, headers=None, api_version=None):
-        return connection.make_request(method, url, data, params, headers, api_version)
+    def _make_request(cls, method, url, connection, data=None, params=None, headers=None):
+        return connection.make_request(method, url, data, params, headers, api_version=cls.api_version)
 
     @classmethod
     def _get_path(cls, id):
